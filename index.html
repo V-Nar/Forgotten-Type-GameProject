@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/style.css">
+    <title>Forgotten-Type</title>
+</head>
+<body>
+    <img src="#" alt="Forgotten-Type logo" />
+
+    <!-- Welcome screen structure -->
+    <section id="start-screen">
+        <h1>Welcome to Forgotten-Type!</h1>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, necessitatibus vero. Consequatur assumenda ipsa ea aspernatur libero porro iste nisi obcaecati delectus, repudiandae aut. Rem cumque recusandae voluptatem aspernatur ex.</p>
+        <button id="btn-newGame" class="btn">New Game</button>
+        <div>
+            <button id="rules" class="btn">Rules</button>
+            <button id="hi-scores" class="btn">Hi-Scores</button>
+        </div>
+    </section>
+
+    <!-- game rules bloc-->
+    <div id="rules">
+        <div>
+            <button class="close-window">X</button>
+            <h2>Rules</h2>
+        </div>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam nisi hic obcaecati itaque recusandae impedit facere iste in! Reiciendis totam sapiente dolor sit quis tempore nisi maxime distinctio, numquam perspiciatis?</p>
+        <canvas id="demo" width="200" height="400"></canvas>
+    </div>
+    
+    <!-- hi-scores bloc -->
+    <div id="hi-scores-tab">
+        <div>
+            <button class="close-window">X</button>
+            <h2>Hall of Forgottens</h2>
+        </div>
+        <table>
+            <tboby>
+                <tr data-place="1">
+                    <th>1st.</th>
+                    <td class="player-name">LETS</td>
+                    <td class="hi-score">1000</td>
+                </tr>
+                <tr data-place="2">
+                    <th>2nd.</th>
+                    <td class="player-name">KICK</td>
+                    <td class="hi-score">900</td>
+                </tr>
+                <tr data-place="3">
+                    <th>3rd.</th>
+                    <td class="player-name">SOME</td>
+                    <td class="hi-score">800</td>
+                </tr>
+                <tr data-place="4">
+                    <th>4th.</th>
+                    <td class="player-name">ASS.</td>
+                    <td class="hi-score">700</td>
+                </tr>
+                <tr data-place="5">
+                    <th>5th.</th>
+                    <td class="player-name">!!!!</td>
+                    <td class="hi-score">600</td>
+                </tr>
+            </tboby>
+        </table>
+    </div>
+
+    <!-- game GUI -->
+    <div id="game-screen" class="screen hidden">
+        <div>
+            <div>
+                <div>
+                    <div id="life-bar"></div>
+                    <img src="#" alt="faces">
+                </div>
+                <div id="lives"></div>
+            </div>
+            <div>
+                <p id="waves">Wave 1/10</p>
+                <button id="skip"><img src="#" alt="skip-btn" /></button>
+            </div>
+            <ul>
+                <li id="hi-score">Hi:</li>
+                <li id="current-score">0000</li>
+            </ul>
+        </div>
+        <canvas id="game" width="800" height="600"></canvas>
+    </div>
+
+    <!-- Game Over screen -->
+    <div id="game-over">
+        <h2></h2>
+        <div id="suck" class="hidden">
+            <p>Even a baby could do better, you suck as hell!</p>
+        </div>
+        <div id="fame" class="hidden">
+            <p>Hey, you're joining the Hall of Fame!</p>
+            <label for="name">Enter your name</label>
+            <input type="text" id="name" name="name" minlength="1" maxlength="4" size="10">
+        </div>
+    </div>
+
+</body>
+</html>
