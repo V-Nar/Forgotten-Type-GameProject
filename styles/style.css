@@ -1,0 +1,174 @@
+@font-face {
+    font-family: 'retro gaming';
+    src: url(./fonts/Retro_Gaming.ttf);
+}
+
+* {
+    margin: 0;
+    font-family: 'retro gaming', Arial, sans-serif;
+    color: white;
+    text-align: center;
+}
+
+canvas {
+    border: 1px solid red;
+}
+
+#logo {
+    display: block;
+    width: 40%;
+    margin: 5px auto;
+}
+
+#welcome {
+    background-color: black;
+    display: block;
+    width: 900px;
+    height: 550px;
+    margin: 20px auto;
+    border: 2px solid white;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+#welcome p {
+    line-height: 1.7em;
+    margin: 30px 50px 20px;
+}
+
+#welcome div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn {
+    background-color: orange;
+    width: fit-content;
+    border: 2px solid red;
+    border-radius: 50px;
+    padding: 5px 10px;
+    margin: 5px;
+}
+
+#btn-newGame {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+#rules, #hi-scores {
+    display: block;
+    background-color: black;
+    width: 600px;
+    height: 450px;
+    border: 2px solid white;
+    border-radius: 5%;
+    margin: 50px auto;
+}
+
+#rules p {
+    line-height: 1.3em;
+    margin-bottom: 20px;
+}
+
+.btn-close {
+    font-size: 1.5em;
+    background-color: transparent;
+    border: none;
+    float: inline-end;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+h2 {
+    font-size: 1.7em;
+    padding: 20px 40px;
+}
+
+table {
+    font-size: 1.5em;
+    width: 70%;
+    height: 70%;
+    border: 5px solid white;
+    border-radius: 10px;
+    margin: 10px auto;
+}
+
+.player-name {
+    text-align: left;
+}
+
+.hi-score {
+    text-align: right;
+    padding-right: 30px;
+}
+
+#game-screen {
+    width: 900px;
+    height: 550px;
+    background: url('');
+    margin: 20px auto;
+}
+
+#gui {
+    position: absolute;
+    width: 900px;
+    height: 4em;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    background-color: black;
+}
+
+#player-gui {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+#marine {
+    border-radius: 10px;
+    width: 50px;
+    height: 50px;
+}
+
+#life-status {
+    text-align: left;
+    height: 50px;
+    margin-left: 10px;
+}
+
+#life-bar {
+    width: 250px;
+    height: 1em;
+    background-color: red;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.heart {
+    width: 30px;
+    text-align: left;
+    margin-right: 10px;
+}
+
+#waves {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+li {
+    text-align: right;
+    list-style-type: none;
+    padding-right: 15px;
+}
+
+#skip-wave {
+    background: none;
+    border: none;
+}

@@ -8,37 +8,33 @@
     <title>Forgotten-Type</title>
 </head>
 <body>
-    <img src="#" alt="Forgotten-Type logo" />
-
+    
     <!-- Welcome screen structure -->
-    <section id="start-screen">
-        <h1>Welcome to Forgotten-Type!</h1>
+    <div id="welcome">
+        <h1>Welcome to</h1>
+        <img id="logo" src="./images/Forgotten-Type_Logo_Large.png" alt="Forgotten-Type logo" />
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, necessitatibus vero. Consequatur assumenda ipsa ea aspernatur libero porro iste nisi obcaecati delectus, repudiandae aut. Rem cumque recusandae voluptatem aspernatur ex.</p>
-        <button id="btn-newGame" class="btn">New Game</button>
         <div>
-            <button id="rules" class="btn">Rules</button>
-            <button id="hi-scores" class="btn">Hi-Scores</button>
+            <button id="btn-newGame" class="btn">New Game</button>
+            <button id="btn-hi-scores" class="btn">Hi-Scores</button>
+            <button id="btn-rules" class="btn">Rules</button>
         </div>
-    </section>
+    </div>
 
     <!-- game rules bloc-->
     <div id="rules">
-        <div>
-            <button class="close-window">X</button>
-            <h2>Rules</h2>
-        </div>
+        <button class="btn-close">X</button>
+        <h2>Rules</h2>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam nisi hic obcaecati itaque recusandae impedit facere iste in! Reiciendis totam sapiente dolor sit quis tempore nisi maxime distinctio, numquam perspiciatis?</p>
-        <canvas id="demo" width="200" height="400"></canvas>
+        <canvas id="demo" width="300" height="250"></canvas>
     </div>
     
     <!-- hi-scores bloc -->
-    <div id="hi-scores-tab">
-        <div>
-            <button class="close-window">X</button>
-            <h2>Hall of Forgottens</h2>
-        </div>
+    <div id="hi-scores">
+        <button class="btn-close">X</button>
+        <h2>Hall of Forgottens</h2>
         <table>
-            <tboby>
+            <tbody>
                 <tr data-place="1">
                     <th>1st.</th>
                     <td class="player-name">LETS</td>
@@ -56,7 +52,7 @@
                 </tr>
                 <tr data-place="4">
                     <th>4th.</th>
-                    <td class="player-name">ASS.</td>
+                    <td class="player-name">ASS</td>
                     <td class="hi-score">700</td>
                 </tr>
                 <tr data-place="5">
@@ -64,40 +60,44 @@
                     <td class="player-name">!!!!</td>
                     <td class="hi-score">600</td>
                 </tr>
-            </tboby>
+            </tbody>
         </table>
     </div>
 
     <!-- game GUI -->
-    <div id="game-screen" class="screen hidden">
-        <div>
-            <div>
-                <div>
+    <div id="game-screen">
+        <div id="gui">
+            <div id="player-gui">
+                <img id="marine" src="./images/Marine_states/marine_good.png" alt="faces" />
+                <div id="life-status">
                     <div id="life-bar"></div>
-                    <img src="#" alt="faces">
+                    <img class="heart" src="./images/heart_full.png" alt="heart" /><img  class="heart" src="./images/heart_full.png" alt="heart" /><img  class="heart" src="./images/heart_full.png" alt="heart" />
+                
                 </div>
-                <div id="lives"></div>
             </div>
-            <div>
-                <p id="waves">Wave 1/10</p>
-                <button id="skip"><img src="#" alt="skip-btn" /></button>
+            <div id="waves">
+                <p id="wave-count">Wave 1/10</p>
+                <button id="skip-wave"><img src="./images/skip_btn.png" alt="skip-btn" /></button>
             </div>
             <ul>
-                <li id="hi-score">Hi:</li>
+                <li id="hi-score">Hi: 1000</li>
                 <li id="current-score">0000</li>
             </ul>
         </div>
-        <canvas id="game" width="800" height="600"></canvas>
+        <canvas id="game" width="900" height="550"></canvas>
     </div>
 
     <!-- Game Over screen -->
     <div id="game-over">
-        <h2></h2>
-        <div id="suck" class="hidden">
-            <p>Even a baby could do better, you suck as hell!</p>
+        <h2>Game Over</h2>
+        <div id="loser">
+            <p>Score: </p>
+            <p>A baby could do better, loooooser!!!</p>
+            <button class="btn try-again">Try again?</button>
         </div>
-        <div id="fame" class="hidden">
-            <p>Hey, you're joining the Hall of Fame!</p>
+        <div id="fame">
+            <p>Score: </p>
+            <p>Congratulation! You're joining the Hall of Forgottens!</p>
             <label for="name">Enter your name</label>
             <input type="text" id="name" name="name" minlength="1" maxlength="4" size="10">
         </div>
