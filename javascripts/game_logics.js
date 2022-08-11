@@ -1,112 +1,138 @@
-const gameCanvas = document.querySelector('#game')
-const ctx = gameCanvas.getContext('2d')
+const gameCanvas = document.querySelector("#game");
+const ctx = gameCanvas.getContext("2d");
 
 function clearGameCanvas() {
-    ctx.clearRect(0, 0, 900, 550)
+  ctx.clearRect(0, 0, 900, 550);
 }
+
+
 
 // const playerSpriteSheet = new Image();
 // playerSpriteSheet.src = './images/Players/player.png';
 
+// player definition
 class Player {
     constructor() {
-        this.x = 20
-        this.y = 232
-        this.width = 42
-        this.height = 67.5
-        this.health = 100
-        this.speed = 10
-        this.image = new Image()
-        this.image.addEventListener('load', () => {
-            this.display()
-        })
-        this.image.src = '../images/Players/player1.png'
+        this.x = 20;
+        this.y = 232;
+        this.width = 42;
+        this.height = 67.5;
+        this.health = 100;
+        this.speed = 5;
+        this.image = new Image();
+        this.image.addEventListener("load", () => {
+            this.display();
+        });
+        this.image.src = "../images/Players/player1.png";
+        this.fireRate = 0.3;
+        this.bullets = [];
+        this.timeToNextBullet = 0;
     }
-    
+
     moveUp() {
-        this.y -= this.speed
-        if (this.y < 64) {
-            return
-        }
-        this.display()
+        this.y -= this.speed;
     }
-
     moveDown() {
-        this.y += this.speed
-        if (this.y > (550 - this.height)) {
-            return
-        }
-        this.display()
+        this.y += this.speed;
     }
-
     moveLeft() {
-        this.x -= this.speed
-        if (this.x < 0){
-            return
-        }
-        this.display()
+        this.x -= this.speed;
     }
-
     moveRight() {
-        this.x += this.speed
-        if (this.x > (900 - this.width)) {
-            return
-        }
-        this.display()
+        this.x += this.speed;
     }
 
     display() {
-        ctx.imageSmoothingEnabled = false
-        ctx.drawImage(this.image, 272, 6, 27, 44, this.x, this.y, this.width, this.height)
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(this.image, 272, 6, 27, 44, this.x, this.y, this.width, this.height);
+    }
+
+    displayBullets(deltaTime) {
+        this.timeToNextBullet += deltaTime;
+
+        if (this.timeToNextBullet > (bulletInterval * this.fireRate)) { 
+            this.bullets.push(new PlayerBullet());
+            this.timeToNextBullet = 0;
+        }
+
+        [...this.bullets].forEach((bullet, i) => {
+            if (bullet.x > gameCanvas.width) {
+            this.bullets.splice(i, 1);
+            }
+            bullet.move();
+        });
+        this.bullets.forEach((bullet) => bullet.draw());
     }
 }
 
-const player = new Player()
+
+const player = new Player();
 
 
 class PlayerBullet {
-    constructor() {
-        this.pow = 30
-        this.fireRate = 0.5
-        this.speed = 10
-        this.x = player.x + 36
-        this.y = player.y + 17
-        this.playerBullet = new Image()
-        this.playerBullet.src = '../images/Players/laser.png'
+    constructor(x, y, speed) {
+        this.pow = 30;
+        this.speed = 20;
+        this.width = 8;
+        this.height = 3
+        this.x = player.x + 36;
+        this.y = player.y + 17;
+        this.bullet = new Image();
+        this.bullet.addEventListener("load", () => {
+            this.draw()
+        });
+        this.bullet.src = "../images/Players/laser.png";
     }
     
-    shot() {
-        this.x += this.speed   
+    move() {
+        this.x += this.speed;
     }
     
-    generateBullet() {
-        ctx.imageSmoothingEnabled = false
-        ctx.drawImage(this.playerBullet, 81, 93, 32, 8, this.x, this.y, 8, 3)
+    draw() {
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(this.bullet, 81, 93, 32, 8, this.x, this.y, 8, 3);
     }
 }
 
+class Aliens {
+    constructor() {
+        this.x = gameCanvas.width;
+        this.y = (Math.random() * 447) + 64;
+        this.width = 23;
+        this.height = 24;
+        this.health = 50;
+        this.speed = 3;
+        this.alien = new Image();
+        this.alien.addEventListener("load", () => {
+        this.display();
+        });
+        this.alien.src = "../images/Aliens/alien1.png";
+    }
+
+
+}
 
 class Game {
     constructor() {
-        this.hiScore = 1000;
-        this.score = 0
-        this.lifes = 3
-        this.waves = 0
-        this.wavesTimer = 0
-    }
+    this.hiScore = 1000;
+    this.score = 0;
+    this.lifes = 3;
+    this.waves = 0;
+    this.wavesTimer = 0;
+  }
 
-    
-
-    countLifes() {
-        if (player.health = 0) {
-            this.lifes--
-        }
+  countLifes() {
+    if ((player.health = 0)) {
+      this.lifes--;
     }
+  }
 
-    
-    startGame() {
-        
+  
+
+  startGame() {}
+  endGame() {
+    if (player.health === 0 && this.lifes === 0) {
+
     }
-    endGame() {}
+  }
 }
-
