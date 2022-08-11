@@ -62,7 +62,7 @@ function move() {
 // credits to #frankslaboratory for the use of <timestamp> in animate()
 
 let lastTime = 0;
-let bulletInterval = 1000;
+let interval = 1000;
 
 // refresh canvas function
 function animate(timestamp) {
@@ -70,6 +70,9 @@ function animate(timestamp) {
     move();
     const deltaTime = timestamp - lastTime;
     lastTime = timestamp;
+    alien.move(deltaTime);
+    alien.display();
+    //console.log(alien);
     player.display();
     player.displayBullets(deltaTime);
     requestAnimationFrame(animate);
