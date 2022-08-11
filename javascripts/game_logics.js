@@ -16,14 +16,17 @@ class Player {
     this.width = 42;
     this.height = 67.5;
     this.speed = 5;
+    this.health = 100
     this.image = new Image();
     this.image.addEventListener("load", () => {
-      this.display();
+    this.display();
     });
     this.image.src = "../images/Players/player1.png";
     this.fireRate = 0.2;
     this.bullets = [];
     this.timeToNextBullet = 0;
+    this.touched = false;
+    this.timeToNextTouch = 0;
   }
 
   moveUp() {
@@ -60,19 +63,30 @@ class Player {
     });
     this.bullets.forEach((bullet) => bullet.draw());
   }
+
+  checkStatus(deltaTime) {
+    if (this.touched) {
+        this.timeToNextTouch += deltaTime;
+        if(this.timeToNextTouch > interval * 2) {
+            this.touched = false;
+            this.timeToNextTouch = 0;
+        }
+    }
+  }
 }
+
 
 const player = new Player();
 
 // player's bullet definition
 class PlayerBullet {
-  constructor(x, y, speed) {
-      this.width = 8;
-      this.height = 3;
-      this.x = player.x + 36;
-      this.y = player.y + 17;
-      this.pow = 30;
-      this.speed = 20;
+  constructor() {
+    this.width = 8;
+    this.height = 3;
+    this.x = player.x + 36;
+    this.y = player.y + 17;
+    this.pow = 30;
+    this.speed = 20;
     this.bullet = new Image();
     this.bullet.addEventListener("load", () => {
       this.draw();
@@ -99,7 +113,7 @@ class Alien {
     this.speedY = 0
     this.width = 34.5;
     this.height = 36;
-    this.health = 50;
+    this.health = 90;
     this.value = 100;
     this.pow = Math.floor(this.health * 0.1);
     this.alien = new Image();
@@ -107,24 +121,13 @@ class Alien {
       this.display();
     });
     this.alien.src = "../images/Aliens/alien1.png";
-    this.aliens = [];
     this.timeToNextY = 0;
     this.popRate = 3;
   }
 
   display() {
     ctx.imageSmoothingEnabled = false;
-    ctx.drawImage(
-      this.alien,
-      0,
-      0,
-      23,
-      24,
-      this.x,
-      this.y,
-      this.width,
-      this.height
-    );
+    ctx.drawImage(this.alien, 0, 0, 23, 24, this.x, this.y, this.width, this.height);
   }
 
   move(deltaTime) {
@@ -157,31 +160,60 @@ class Alien {
     }
     return this.newY;
   }
+
+  killTheAlien() {
+    if (this.health <= 0) {
+        ctx.clearRect(this.x, this.y, this.width, this.height);
+        return true
+    }
+  }
 }
 
-const alien = new Alien();
-
 class AlienBullet {}
+
+
 // general game logics
 class Game {
   constructor() {
     this.hiScore = 1000;
     this.score = 0;
     this.lifes = 3;
+    this.aliens = [];
+    this.timeToNextAlien = 0;
+
   }
 
   countLifes() {
-    if (player.health === 0) {
+    if (player.health <= 0) {
       this.lifes--;
+      if (this.lifes > 0) {
+        player.health = 100
+      }
     }
+  }
+
+  launchAliens(deltaTime) {
+    this.timeToNextAlien += deltaTime;
+    if (this.timeToNextAlien > interval) {
+        this.aliens.push(new Alien());
+        this.timeToNextAlien = 0;
+        }
+    
+        [...this.aliens].forEach((alien, i) => {
+          if (alien.x < 0 - alien.width) {
+            this.aliens.splice(i, 1);
+          }
+        });
+        [...this.aliens].forEach((alien) => alien.move(deltaTime));
+        this.aliens.forEach((alien) => alien.display());
+        
   }
 
   
 
-  startGame() {}
-
   endGame() {
-    if (player.health === 0 && this.lifes === 0) {
+    if ((this.lifes === 0)) {
+        return true;
     }
   }
 }

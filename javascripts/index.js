@@ -67,7 +67,6 @@ function isColliding(a, b) {
     if (distanceX <= (a.width + b.width) / 2 && distanceY <= (a.height + b.height) / 2) {
         aCollideB = true;
     }
-    console.log(aCollideB);
     return aCollideB;
 }
 
@@ -80,11 +79,25 @@ function getCenterY(element) {
   }
 
 //damages management
-function takeDamages() {
-    if (isColliding(alien, player)) {
-        alien.health -= Math.floor(player.health / 2);
-        player.health -= Math.floor(alien.health / 2);
-    }
+function dealDamages() {
+    game.aliens.forEach((alien, i) => {
+        if (isColliding(alien, player)) {
+            if (!player.touched) {
+                player.touched = true;
+                player.health -= Math.floor(alien.health / 2);
+            }
+        }
+
+        player.bullets.forEach((bullet, j) => {
+            if (isColliding(alien, bullet)) {
+            alien.health -= bullet.pow;
+            player.bullets.splice(j, 1);
+            if (alien.killTheAlien()) {
+                game.aliens.splice(i, 1);
+            };
+        }
+        })
+    });
 }
 
 
@@ -96,14 +109,15 @@ let interval = 1000;
 // refresh canvas function
 function animate(timestamp) {
     clearGameCanvas();
-    move();
     const deltaTime = timestamp - lastTime;
     lastTime = timestamp;
-    alien.move(deltaTime);
-    alien.display();
-    //console.log(alien);d
+    move();
     player.display();
     player.displayBullets(deltaTime);
+    player.checkStatus(deltaTime);
+    game.countLifes();
+    game.launchAliens(deltaTime);
+    dealDamages()
     requestAnimationFrame(animate);
 }
 
