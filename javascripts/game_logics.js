@@ -5,9 +5,6 @@ function clearGameCanvas() {
   ctx.clearRect(0, 0, 900, 550);
 }
 
-// const playerSpriteSheet = new Image();
-// playerSpriteSheet.src = './images/Players/player.png';
-
 // player definition
 class Player {
   constructor() {
@@ -108,13 +105,13 @@ class PlayerBullet {
 class Alien {
   constructor() {
     this.x = gameCanvas.width;
-    this.y = Math.random() * 331 + 81;
-    this.speed = 1.5;
+    this.y = Math.random() * 380 + 64;
+    this.speed = (Math.random() * 3) + 1;
     this.speedY = 0
     this.width = 34.5;
     this.height = 36;
     this.health = 90;
-    this.value = 100;
+    this.value = 50;
     this.pow = Math.floor(this.health * 0.1);
     this.alien = new Image();
     this.alien.addEventListener("load", () => {
@@ -143,8 +140,8 @@ class Alien {
         this.y = 81 + this.height
     } 
     
-    if (this.y > 331 - this.height) {
-       this.y = 331 - this.height 
+    if (this.y > 425 - this.height) {
+       this.y = 425 - this.height 
     }
 
     if (this.x < 0 - this.width) {
@@ -169,9 +166,6 @@ class Alien {
   }
 }
 
-class AlienBullet {}
-
-
 // general game logics
 class Game {
   constructor() {
@@ -180,7 +174,6 @@ class Game {
     this.lifes = 3;
     this.aliens = [];
     this.timeToNextAlien = 0;
-
   }
 
   countLifes() {
@@ -192,28 +185,31 @@ class Game {
     }
   }
 
+  
   launchAliens(deltaTime) {
     this.timeToNextAlien += deltaTime;
     if (this.timeToNextAlien > interval) {
         this.aliens.push(new Alien());
         this.timeToNextAlien = 0;
-        }
-    
-        [...this.aliens].forEach((alien, i) => {
-          if (alien.x < 0 - alien.width) {
-            this.aliens.splice(i, 1);
-          }
-        });
-        [...this.aliens].forEach((alien) => alien.move(deltaTime));
-        this.aliens.forEach((alien) => alien.display());
-        
-  }
-
-  
-
-  endGame() {
-    if ((this.lifes === 0)) {
-        return true;
     }
-  }
+    [...this.aliens].forEach((alien, i) => {
+        if (alien.x < 0 - alien.width) {
+            this.aliens.splice(i, 1);
+        }
+    });
+    [...this.aliens].forEach((alien) => alien.move(deltaTime));
+    this.aliens.forEach((alien) => alien.display());
+    }
+    
+    countScore() {
+        this.aliens.forEach((alien, i) => {
+            if (alien.killTheAlien()) {
+                this.score += alien.value;
+                this.aliens.splice(i, 1)
+            }
+        });
+        if (this.score > this.hiScore) {
+            this.hiScore = this.score;
+        }
+    }
 }

@@ -1,5 +1,11 @@
+// credits to #frankslaboratory for the use of <timestamp> in animate()
 const game = new Game();
 const playerBullet = new PlayerBullet();
+
+// global variables
+let lastTime = 0;
+let interval = 1000;
+let reqAnim
 
 
 // smooth player moves
@@ -85,6 +91,9 @@ function dealDamages() {
             if (!player.touched) {
                 player.touched = true;
                 player.health -= Math.floor(alien.health / 2);
+                if (player.health === 0) {
+                    
+                }
             }
         }
 
@@ -92,9 +101,7 @@ function dealDamages() {
             if (isColliding(alien, bullet)) {
             alien.health -= bullet.pow;
             player.bullets.splice(j, 1);
-            if (alien.killTheAlien()) {
-                game.aliens.splice(i, 1);
-            };
+            game.countScore()
         }
         })
     });
@@ -102,12 +109,10 @@ function dealDamages() {
 
 
 
-// credits to #frankslaboratory for the use of <timestamp> in animate()
-let lastTime = 0;
-let interval = 1000;
+
 
 // refresh canvas function
-function animate(timestamp) {
+const animate = (timestamp) => {
     clearGameCanvas();
     const deltaTime = timestamp - lastTime;
     lastTime = timestamp;
@@ -118,7 +123,19 @@ function animate(timestamp) {
     game.countLifes();
     game.launchAliens(deltaTime);
     dealDamages()
-    requestAnimationFrame(animate);
+    console.log(game.lifes);
+    game.endGame()
+    reqAnim = requestAnimationFrame(animate);
 }
 
+
+// DOM
+// welcome screen
+
 animate(0);
+
+// rules and hi-scores
+
+// GUI
+
+// Game Over screen
