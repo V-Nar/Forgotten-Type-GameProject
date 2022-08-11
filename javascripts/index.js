@@ -59,8 +59,37 @@ function move() {
     }
 }
 
-// credits to #frankslaboratory for the use of <timestamp> in animate()
+// collision detection
+function isColliding(a, b) {
+    let aCollideB = false;
+    const distanceX =  Math.abs(getCenterX(a) - getCenterX(b));
+    const distanceY = Math.abs(getCenterY(a) - getCenterY(b));
+    if (distanceX <= (a.width + b.width) / 2 && distanceY <= (a.height + b.height) / 2) {
+        aCollideB = true;
+    }
+    console.log(aCollideB);
+    return aCollideB;
+}
 
+function getCenterX(element) {
+    return element.x + (element.width / 2);
+  }
+
+function getCenterY(element) {
+    return element.y + (element.height / 2);
+  }
+
+//damages management
+function takeDamages() {
+    if (isColliding(alien, player)) {
+        alien.health -= Math.floor(player.health / 2);
+        player.health -= Math.floor(alien.health / 2);
+    }
+}
+
+
+
+// credits to #frankslaboratory for the use of <timestamp> in animate()
 let lastTime = 0;
 let interval = 1000;
 
@@ -72,7 +101,7 @@ function animate(timestamp) {
     lastTime = timestamp;
     alien.move(deltaTime);
     alien.display();
-    //console.log(alien);
+    //console.log(alien);d
     player.display();
     player.displayBullets(deltaTime);
     requestAnimationFrame(animate);
