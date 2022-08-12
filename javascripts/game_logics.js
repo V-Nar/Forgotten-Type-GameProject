@@ -18,7 +18,7 @@ class Player {
     this.image.addEventListener("load", () => {
     this.display();
     });
-    this.image.src = "../images/Players/player1.png";
+    this.image.src = "images/Players/player1.png";
     this.fireRate = 0.2;
     this.bullets = [];
     this.timeToNextBullet = 0;
@@ -88,7 +88,7 @@ class PlayerBullet {
     this.bullet.addEventListener("load", () => {
       this.draw();
     });
-    this.bullet.src = "../images/Players/laser.png";
+    this.bullet.src = "images/Players/laser.png";
   }
 
   move() {
@@ -117,7 +117,7 @@ class Alien {
     this.alien.addEventListener("load", () => {
       this.display();
     });
-    this.alien.src = "../images/Aliens/alien1.png";
+    this.alien.src = "images/Aliens/alien1.png";
     this.timeToNextY = 0;
     this.popRate = 3;
   }
