@@ -97,7 +97,7 @@ class PlayerBullet {
 
   draw() {
     ctx.imageSmoothingEnabled = false;
-    ctx.drawImage(this.bullet, 81, 93, 32, 8, this.x, this.y, 8, 3);
+    ctx.drawImage(this.bullet, 81, 93, 32, 8, this.x, this.y, 10, 5);
   }
 }
 
