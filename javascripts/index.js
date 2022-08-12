@@ -180,17 +180,17 @@ function updateHealthAndPortrait() {
     let health = player.health;
     healthBar.setAttribute('value', health);
     if (health <= 100 && health >= 80) {
-        portait.setAttribute('src', '../images/Marine_states/marine_good.png');
+        portait.setAttribute('src', 'images/Marine_states/marine_good.png');
     } else if (health < 80 && health >= 60) {
-        portait.setAttribute('src', '../images/Marine_states/marine_slightly_damaged.png');
+        portait.setAttribute('src', 'images/Marine_states/marine_slightly_damaged.png');
     } else if (health < 60 && health >= 40) {
-        portait.setAttribute('src', '../images/Marine_states/marine_damaged.png');
+        portait.setAttribute('src', 'images/Marine_states/marine_damaged.png');
     } else if (health < 40 && health >= 20) {
-        portait.setAttribute('src', '../images/Marine_states/marine_badly_damaged.png');   
+        portait.setAttribute('src', 'images/Marine_states/marine_badly_damaged.png');   
     } else if (health < 20 && health > 0) {
-        portait.setAttribute('src', '../images/Marine_states/marine_heavy_damaged.png');
+        portait.setAttribute('src', 'images/Marine_states/marine_heavy_damaged.png');
     } else if (health === 0) {
-        portait.setAttribute('src', '../images/Marine_states/marine_dead.png');
+        portait.setAttribute('src', 'images/Marine_states/marine_dead.png');
     }
 }
 
