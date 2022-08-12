@@ -1,6 +1,5 @@
 // credits to #frankslaboratory for the use of <timestamp> in animate()
-const game = new Game();
-const playerBullet = new PlayerBullet();
+
 
 // global variables
 let lastTime = 0;
@@ -91,9 +90,6 @@ function dealDamages() {
             if (!player.touched) {
                 player.touched = true;
                 player.health -= Math.floor(alien.health / 2);
-                if (player.health === 0) {
-                    
-                }
             }
         }
 
@@ -110,7 +106,6 @@ function dealDamages() {
 
 
 
-
 // refresh canvas function
 const animate = (timestamp) => {
     clearGameCanvas();
@@ -120,7 +115,12 @@ const animate = (timestamp) => {
     player.display();
     player.displayBullets(deltaTime);
     player.checkStatus(deltaTime);
-    game.countLifes();
+    const endGame = game.countLifes();
+    if(endGame) {
+        cancelAnimationFrame(reqAnim)
+        gameOver()
+        return
+    }
     game.launchAliens(deltaTime);
     dealDamages();
     updateHealthAndPortrait()
@@ -134,17 +134,21 @@ const gameOverScreen = document.getElementById('game-over');
 // const loser = document.getElementById('loser');
 // const fame = document.getElementById('fame');
 const homeBtn = document.querySelector('.home');
-const nameInput = document.getElementById('name');
+// const nameInput = document.getElementById('name');
 
 // welcome screen
 const welcomeScreen = document.getElementById('welcome');
 const startBtn = document.getElementById('btn-newGame');
 const rulesBtn = document.getElementById('btn-rules');
 // const hiScoresBtn = document.getElementById('btn-hi-scores');
+let player, game, playerBullet
 
 startBtn.addEventListener('click', () => {
     welcomeScreen.classList.toggle('hidden');
-    // gameScreen.classList.toggle('hidden');
+    gameScreen.classList.toggle('hidden');
+    player = new Player();
+    game = new Game()
+    playerBullet = new PlayerBullet();
     animate(0);
 });
 
@@ -194,3 +198,15 @@ function updateHealthAndPortrait() {
 
 
 // Game Over screen
+
+const finalScore = document.getElementById('final-score')
+function gameOver() {
+    gameOverScreen.classList.toggle('hidden');
+    finalScore.textContent = `${game.score}`;
+}
+
+homeBtn.addEventListener('click', () => {
+    gameOverScreen.classList.toggle('hidden');
+    gameScreen.classList.toggle('hidden');
+    welcomeScreen.classList.toggle('hidden');
+});

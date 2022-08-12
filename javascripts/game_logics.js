@@ -70,10 +70,10 @@ class Player {
         }
     }
   }
+
+
 }
 
-
-const player = new Player();
 
 // player's bullet definition
 class PlayerBullet {
@@ -178,6 +178,9 @@ class Game {
   }
 
   countLifes() {
+    if(this.lifes === 0) {
+      return true
+    }
     if (player.health <= 0) {
       this.lifes--;
       switch (this.lifes) {
@@ -228,4 +231,7 @@ class Game {
         //     this.hiScore = this.score;
         // }
     }
+
+
+    
 }

@@ -18,12 +18,12 @@
         <div>
             <button id="btn-newGame" class="btn" type="button">New Game</button>
             <button id="btn-rules" class="btn" type="button">Rules</button>
-            <button id="btn-hi-scores" class="btn" type="button">Hi-Scores</button>
+            <!-- <button id="btn-hi-scores" class="btn" type="button">Hi-Scores</button> -->
         </div>
     </div>
 
     <!-- game rules bloc-->
-    <div id="rules">
+    <div id="rules" class="hidden">
         <button type="button">X</button>
         <h2>Rules</h2>
         <p>Kill them all and free earth! Ok genius?</p>
@@ -69,8 +69,8 @@
         </table>
     </div> -->
 
-    <!-- game GUI -->
-    <div id="game-screen">
+    <!-- game GUI -->       
+    <div id="game-screen" class="hidden">
         <div id="gui">
             <div id="player-gui">
                 <img id="marine" src="./images/Marine_states/marine_good.png" alt="faces" />
@@ -90,7 +90,7 @@
     </div>
 
     <!-- Game Over screen -->
-    <div id="game-over">
+    <div id="game-over" class="hidden">
         <h2>Game Over</h2>
         <div id="loser">
             <p>Score: <span id="final-score">0000</span></p>

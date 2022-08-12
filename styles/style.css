@@ -25,6 +25,10 @@ canvas {
 }
 
 #welcome {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     background-color: black;
     display: block;
     border-radius: 20px;
@@ -65,7 +69,11 @@ h1 {
     margin-bottom: 10px;
 }
 
-#rules, #hi-scores, #game-over {
+#rules, #game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     display: block;
     background-color: black;
     width: 600px;
@@ -113,6 +121,10 @@ table {
 }
 
 #game-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     width: 900px;
     height: 550px;
     background-image: url('../images/game_background.png');
