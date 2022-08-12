@@ -167,9 +167,10 @@ class Alien {
 }
 
 // general game logics
+
 class Game {
   constructor() {
-    this.hiScore = 1000;
+    // this.hiScore = 1000;
     this.score = 0;
     this.lifes = 3;
     this.aliens = [];
@@ -179,13 +180,27 @@ class Game {
   countLifes() {
     if (player.health <= 0) {
       this.lifes--;
+      switch (this.lifes) {
+        case 2:
+            hearts[2].classList.toggle('hidden');
+            break;
+        case 1:
+            hearts[1].classList.toggle('hidden');
+            break;
+        case 0:
+            hearts[0].classList.toggle('hidden');
+            break;
+      }
       if (this.lifes > 0) {
         player.health = 100
       }
     }
   }
 
-  
+    getScore() {
+        document.getElementById('score').textContent = `${this.score}`;
+    }
+
   launchAliens(deltaTime) {
     this.timeToNextAlien += deltaTime;
     if (this.timeToNextAlien > interval) {
@@ -205,11 +220,12 @@ class Game {
         this.aliens.forEach((alien, i) => {
             if (alien.killTheAlien()) {
                 this.score += alien.value;
-                this.aliens.splice(i, 1)
+                this.aliens.splice(i, 1);
+                this.getScore();
             }
         });
-        if (this.score > this.hiScore) {
-            this.hiScore = this.score;
-        }
+        // if (this.score > this.hiScore) {
+        //     this.hiScore = this.score;
+        // }
     }
 }

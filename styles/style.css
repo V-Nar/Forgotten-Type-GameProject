@@ -15,7 +15,6 @@
 }
 
 canvas {
-    border: 1px solid red;
     border-radius: 20px;
 }
 
@@ -149,10 +148,10 @@ table {
     margin-left: 10px;
 }
 
-#life-bar {
+progress {
     width: 250px;
-    height: 1em;
-    background-color: red;
+    height: 20px;
+    background-color: transparent;
     margin-bottom: 5px;
 }
 

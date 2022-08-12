@@ -122,20 +122,75 @@ const animate = (timestamp) => {
     player.checkStatus(deltaTime);
     game.countLifes();
     game.launchAliens(deltaTime);
-    dealDamages()
-    console.log(game.lifes);
-    game.endGame()
+    dealDamages();
+    updateHealthAndPortrait()
     reqAnim = requestAnimationFrame(animate);
 }
 
 
-// DOM
+// DOM - globale constants
+const hearts = document.querySelectorAll('.heart');
+const gameOverScreen = document.getElementById('game-over');
+// const loser = document.getElementById('loser');
+// const fame = document.getElementById('fame');
+const homeBtn = document.querySelector('.home');
+const nameInput = document.getElementById('name');
+
 // welcome screen
+const welcomeScreen = document.getElementById('welcome');
+const startBtn = document.getElementById('btn-newGame');
+const rulesBtn = document.getElementById('btn-rules');
+// const hiScoresBtn = document.getElementById('btn-hi-scores');
 
-animate(0);
+startBtn.addEventListener('click', () => {
+    welcomeScreen.classList.toggle('hidden');
+    // gameScreen.classList.toggle('hidden');
+    animate(0);
+});
 
-// rules and hi-scores
+rulesBtn.addEventListener('click', () => rulesScreen.classList.toggle('hidden'));
+
+// hiScoresBtn.addEventListener('click', () => hiScroresScreen.classList.toggle('hidden'));
+
+// rules and hi-scores X button
+const rulesScreen = document.getElementById('rules');
+const rulesScreenBtn = document.querySelector('#rules button');
+// const hiScroresScreen = document.getElementById('hi-scores');
+// const hiScroresScreenBtn = document.querySelector('#hi-scores button');
+
+rulesScreenBtn.addEventListener('click', () => rulesScreen.classList.toggle('hidden'));
+// hiScroresScreenBtn.addEventListener('click', () => hiScroresScreen.classList.toggle('hidden'))
+
+// report score on GUI
+
+
 
 // GUI
+const gameScreen = document.getElementById('game-screen');
+
+// health bar, portrait and lifes update
+const portait = document.getElementById('marine');
+const healthBar = document.querySelector('progress');
+
+function updateHealthAndPortrait() {
+    let health = player.health;
+    healthBar.setAttribute('value', health);
+    if (health <= 100 && health >= 80) {
+        portait.setAttribute('src', '../images/Marine_states/marine_good.png');
+    } else if (health < 80 && health >= 60) {
+        portait.setAttribute('src', '../images/Marine_states/marine_slightly_damaged.png');
+    } else if (health < 60 && health >= 40) {
+        portait.setAttribute('src', '../images/Marine_states/marine_damaged.png');
+    } else if (health < 40 && health >= 20) {
+        portait.setAttribute('src', '../images/Marine_states/marine_badly_damaged.png');   
+    } else if (health < 20 && health > 0) {
+        portait.setAttribute('src', '../images/Marine_states/marine_heavy_damaged.png');
+    } else if (health === 0) {
+        portait.setAttribute('src', '../images/Marine_states/marine_dead.png');
+    }
+}
+
+// const hiScoresTab = document.getElementById('hi-score');
+
 
 // Game Over screen

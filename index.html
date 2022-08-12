@@ -13,17 +13,18 @@
     <div id="welcome">
         <h1>Welcome to</h1>
         <img id="logo" src="./images/Forgotten-Type_Logo_Large.png" alt="Forgotten-Type logo" />
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, necessitatibus vero. Consequatur assumenda ipsa ea aspernatur libero porro iste nisi obcaecati delectus, repudiandae aut. Rem cumque recusandae voluptatem aspernatur ex.</p>
+        <p>A tribute to old time shoot'em up.</p>
+        <p>Enjoy this infinite shooting game, let's kick some aliens asses fellahs!</p>
         <div>
-            <button id="btn-newGame" class="btn">New Game</button>
-            <button id="btn-rules" class="btn">Rules</button>
-            <button id="btn-hi-scores" class="btn">Hi-Scores</button>
+            <button id="btn-newGame" class="btn" type="button">New Game</button>
+            <button id="btn-rules" class="btn" type="button">Rules</button>
+            <button id="btn-hi-scores" class="btn" type="button">Hi-Scores</button>
         </div>
     </div>
 
     <!-- game rules bloc-->
     <div id="rules">
-        <button class="btn-close">X</button>
+        <button type="button">X</button>
         <h2>Rules</h2>
         <p>Kill them all and free earth! Ok genius?</p>
         <p>You know the trick:</p>
@@ -33,9 +34,9 @@
         
     </div>
     
-    <!-- hi-scores bloc -->
+    <!-- hi-scores bloc
     <div id="hi-scores">
-        <button class="btn-close">X</button>
+        <button type="button">X</button>
         <h2>Hall of Forgottens</h2>
         <table>
             <tbody>
@@ -66,7 +67,7 @@
                 </tr>
             </tbody>
         </table>
-    </div>
+    </div> -->
 
     <!-- game GUI -->
     <div id="game-screen">
@@ -74,20 +75,15 @@
             <div id="player-gui">
                 <img id="marine" src="./images/Marine_states/marine_good.png" alt="faces" />
                 <div id="life-status">
-                    <progress id="life-bar" max="100" value="100"></progress>
-                    <div>
+                    <progress max="100" value="100"></progress>
+                    <div id="hearts">
                         <img class="heart" src="./images/heart_full.png" alt="heart" /><img  class="heart" src="./images/heart_full.png" alt="heart" /><img  class="heart" src="./images/heart_full.png" alt="heart" />
                     </div>
                 </div>
             </div>
-    <!-- unused feature, keep it for later
-            <div id="waves">
-                <p id="wave-count">Wave 0/10</p>
-                <button id="skip-wave"><img src="./images/skip_btn.png" alt="skip-btn" /></button>
-            </div> -->
             <ul>
-                <li id="hi-score">Hi: 1000</li>
-                <li id="current-score">0000</li>
+                <!-- <li ><p> Hi: <span id="h-score">1000</span></p></li> -->
+                <li ><p>Score: <span id="score">0000</span></p></li>
             </ul>
         </div>
         <canvas id="game" width="900" height="550"></canvas>
@@ -97,17 +93,17 @@
     <div id="game-over">
         <h2>Game Over</h2>
         <div id="loser">
-            <p>Score: 0000</p>
-            <p>A baby could do better, loooooser!!!</p>
-            <button class="btn try-again">Home</button>
+            <p>Score: <span id="final-score">0000</span></p>
+            <p>C'mon, a baby could do better, loooooser!!!</p>
+            <button class="btn home" type="button">Home</button>
         </div>
-        <div id="fame">
+        <!-- <div id="fame">
             <p>Score: 0000</p>
             <p>Congratulation! You're joining the Hall of Forgottens!</p>
             <label for="name">Enter your name</label>
             <input type="text" id="name" name="name" minlength="1" maxlength="4" size="10">
-            <button class="btn try-again">Home</button>
-        </div>
+            <button class="btn home" type="button">Home</button>
+        </div> -->
     </div>
     <script src="./javascripts/game_logics.js"></script>
     <script src="./javascripts/index.js"></script>
