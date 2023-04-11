@@ -112,16 +112,16 @@ const animate = (timestamp) => {
   clearGameCanvas();
   const deltaTime = timestamp - lastTime;
   lastTime = timestamp;
-  move();
-  player.display();
-  player.displayBullets(deltaTime);
-  player.checkStatus(deltaTime);
   const endGame = game.countLives();
   if (endGame) {
     cancelAnimationFrame(reqAnim);
     gameOver();
     return;
   }
+  move();
+  player.display();
+  player.displayBullets(deltaTime);
+  player.checkStatus(deltaTime);
   game.launchAliens(deltaTime);
   dealDamages();
   updateHealthAndPortrait();
@@ -130,17 +130,17 @@ const animate = (timestamp) => {
 
 // DOM - globale constants
 const gameOverScreen = document.getElementById('game-over');
+const homeBtn = document.querySelector('.home');
 // const loser = document.getElementById('loser');
 // const fame = document.getElementById('fame');
-const homeBtn = document.querySelector('.home');
 // const nameInput = document.getElementById('name');
 
 // welcome screen
 const welcomeScreen = document.getElementById('welcome');
 const startBtn = document.getElementById('btn-newGame');
 const rulesBtn = document.getElementById('btn-rules');
-// const hiScoresBtn = document.getElementById('btn-hi-scores');
 let player, game, playerBullet;
+// const hiScoresBtn = document.getElementById('btn-hi-scores');
 
 startBtn.addEventListener('click', () => {
   welcomeScreen.classList.toggle('hidden');
@@ -156,18 +156,17 @@ rulesBtn.addEventListener('click', () =>
   rulesScreen.classList.toggle('hidden')
 );
 
-// hiScoresBtn.addEventListener('click', () => hiScroresScreen.classList.toggle('hidden'));
-
 // rules and hi-scores X button
 const rulesScreen = document.getElementById('rules');
 const rulesScreenBtn = document.querySelector('#rules button');
-// const hiScroresScreen = document.getElementById('hi-scores');
-// const hiScroresScreenBtn = document.querySelector('#hi-scores button');
 
 rulesScreenBtn.addEventListener('click', () =>
   rulesScreen.classList.toggle('hidden')
 );
 // hiScroresScreenBtn.addEventListener('click', () => hiScroresScreen.classList.toggle('hidden'))
+// hiScoresBtn.addEventListener('click', () => hiScroresScreen.classList.toggle('hidden'));
+// const hiScroresScreen = document.getElementById('hi-scores');
+// const hiScroresScreenBtn = document.querySelector('#hi-scores button');
 
 // report score on GUI
 
@@ -205,6 +204,7 @@ function updateHealthAndPortrait() {
     portait.setAttribute('src', 'images/Marine_states/marine_dead.png');
   }
 }
+
 function displayLives() {
   let count = game.lives;
   for (let i = 0; i < count; i++) {

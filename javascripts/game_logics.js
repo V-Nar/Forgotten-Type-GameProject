@@ -54,8 +54,8 @@ class Player {
     );
   }
 
-  displayBullets(deltaTime) {
-    this.timeToNextBullet += deltaTime;
+  displayBullets(delay) {
+    this.timeToNextBullet += delay;
 
     if (this.timeToNextBullet > interval * this.fireRate) {
       this.bullets.push(new PlayerBullet());
@@ -71,9 +71,9 @@ class Player {
     this.bullets.forEach((bullet) => bullet.draw());
   }
 
-  checkStatus(deltaTime) {
+  checkStatus(delay) {
     if (this.touched) {
-      this.timeToNextTouch += deltaTime;
+      this.timeToNextTouch += delay;
       if (this.timeToNextTouch > interval * 2) {
         this.touched = false;
         this.timeToNextTouch = 0;
@@ -124,7 +124,7 @@ class Alien {
     this.alien.addEventListener('load', () => {
       this.display();
     });
-    this.alien.src = 'images/Aliens/alien1.png';
+    this.alien.src = 'images/Aliens/alien_states.png';
     this.timeToNextY = 0;
     this.popRate = 3;
   }
@@ -133,8 +133,8 @@ class Alien {
     ctx.imageSmoothingEnabled = false;
     ctx.drawImage(
       this.alien,
-      0,
-      0,
+      30,
+      35,
       23,
       24,
       this.x,
@@ -142,16 +142,22 @@ class Alien {
       this.width,
       this.height
     );
+    ctx.beginPath();
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = 3;
+    ctx.moveTo(this.x, this.y - 5);
+    ctx.lineTo(this.x + (this.health / 90) * this.width, this.y - 5);
+    ctx.stroke();
   }
 
-  move(deltaTime) {
+  move(delay) {
     if (this.isOffScreen) {
       return;
     }
 
     this.x -= this.speed;
 
-    this.calculateSpeedY(deltaTime);
+    this.calculateSpeedY(delay);
     this.y += this.speedY;
     if (this.y < 81 + this.height) {
       this.y = 81 + this.height;
@@ -166,18 +172,17 @@ class Alien {
     }
   }
 
-  calculateSpeedY(deltaTime) {
-    this.timeToNextY += deltaTime;
+  calculateSpeedY(delay) {
+    this.timeToNextY += delay;
     if (this.timeToNextY > interval * 0.6) {
       this.speedY = 6 * (Math.random() - 0.5);
       this.timeToNextY = 0;
     }
-    return this.newY;
   }
 
   killTheAlien() {
     if (this.health <= 0) {
-      ctx.clearRect(this.x, this.y, this.width, this.height);
+      ctx.clearRect(this.x, this.y - 5, this.width, this.height + 5);
       return true;
     }
   }
@@ -200,6 +205,7 @@ class Game {
     }
     if (player.health <= 0) {
       this.lives--;
+      // console.log(this.lives);
       hearts.removeChild(hearts.lastElementChild);
       if (this.lives > 0) {
         player.health = 100;
@@ -211,8 +217,8 @@ class Game {
     document.getElementById('score').textContent = `${this.score}`;
   }
 
-  launchAliens(deltaTime) {
-    this.timeToNextAlien += deltaTime;
+  launchAliens(delay) {
+    this.timeToNextAlien += delay;
     if (this.timeToNextAlien > interval) {
       this.aliens.push(new Alien());
       this.timeToNextAlien = 0;
@@ -222,7 +228,7 @@ class Game {
         this.aliens.splice(i, 1);
       }
     });
-    [...this.aliens].forEach((alien) => alien.move(deltaTime));
+    [...this.aliens].forEach((alien) => alien.move(delay));
     this.aliens.forEach((alien) => alien.display());
   }
 
