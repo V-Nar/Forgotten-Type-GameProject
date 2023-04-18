@@ -127,13 +127,16 @@ class Alien {
     this.alien.src = 'images/Aliens/alien_states.png';
     this.timeToNextY = 0;
     this.popRate = 3;
+    this.timeToNextFrame = 0;
+    this.frame = 0;
+    this.frameX = 30;
   }
 
   display() {
     ctx.imageSmoothingEnabled = false;
     ctx.drawImage(
       this.alien,
-      30,
+      this.frameX,
       35,
       23,
       24,
@@ -148,6 +151,20 @@ class Alien {
     ctx.moveTo(this.x, this.y - 5);
     ctx.lineTo(this.x + (this.health / 90) * this.width, this.y - 5);
     ctx.stroke();
+  }
+
+  calculateNextFrame(delay) {
+    this.timeToNextFrame += delay;
+    if (this.timeToNextFrame > interval * 0.08) {
+      if (this.frame < 5) {
+        this.frameX += 41;
+        this.frame++;
+      } else {
+        this.frame = 0;
+        this.frameX = 30;
+      }
+      this.timeToNextFrame = 0;
+    }
   }
 
   move(delay) {
@@ -229,7 +246,10 @@ class Game {
       }
     });
     [...this.aliens].forEach((alien) => alien.move(delay));
-    this.aliens.forEach((alien) => alien.display());
+    this.aliens.forEach((alien) => {
+      alien.calculateNextFrame(delay);
+      alien.display(delay);
+    });
   }
 
   countScore() {
